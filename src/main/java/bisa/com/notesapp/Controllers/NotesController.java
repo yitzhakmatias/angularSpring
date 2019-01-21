@@ -2,6 +2,7 @@ package bisa.com.notesapp.Controllers;
 
 import bisa.com.notesapp.Models.Note;
 import bisa.com.notesapp.Repositories.NotesRepository;
+import org.hibernate.sql.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +33,11 @@ public class NotesController {
     public Note get(@PathVariable("id") long id) {
 
         return repository.getOne(id);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("id") long id) {
+        Note note = repository.getOne(id);
+        repository.delete(note);
     }
 }
